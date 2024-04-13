@@ -1,10 +1,15 @@
 mode: command
 -
 # save a mouse position to a spot name
-spot save <user.text>: user.save_spot(user.text)
+spot save <user.word> <number_small>: user.save_spot("{word}{number_small}")
+
+# save a mouse position to a spot name
+spot save <user.word>: user.save_spot("{word}")
 
 # click a saved spot then return the cursor to its prior position
-spot [(click|touch)] <user.text>: user.click_spot(user.text)
+spot [(click|touch)] <user.word>: user.move_to_spot("{word}")
+
+spot [(click|touch)] <user.word> <number_small>: user.move_to_spot("{word}{number_small}")
 
 # move the cursor to a saved spot
 spot move <user.text>: user.move_to_spot(user.text)
@@ -18,7 +23,8 @@ spot swipe <user.text>: user.drag_spot(user.text, 1)
 spot clear all: user.clear_spot_dictionary()
 
 # delete a specific spot (does not alter the cached dictionary of spots)
-spot clear <user.text>: user.clear_spot(user.text)
+spot clear <user.word>: user.clear_spot(user.word)
+spot clear <user.word> <number_small>: user.clear_spot("{word}{number_small}")
 
 # display a list of all active spot names
 spot list [all]: user.list_spot()
